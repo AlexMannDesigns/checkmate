@@ -7,5 +7,8 @@
 #include <stdio.h>
 
 void	ft_putchar(char c);
+void	ft_putstr(char *s);
+size_t	ft_strlen(char *s);
+
 
 #endif
