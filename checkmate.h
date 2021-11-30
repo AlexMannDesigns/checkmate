@@ -18,5 +18,6 @@ void	ft_putstr(char *s);
 size_t	ft_strlen(char *s);
 char	**create_board(char **argv, size_t columns, int rows);
 t_point	find_king(char **board);
+int	check_pawn(char **board, t_point king);
 
 #endif

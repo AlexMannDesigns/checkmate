@@ -1,19 +1,22 @@
 #include "checkmate.h"
 
-int	check_pawn(char **board, size_t size, t_point king)
+int	check_bishop(char **board, t_point king, int f)
 {
-	//if previous row, inderow + 1 or - 1 == p then return 1, else 0.
-
-	if (board[king.row - 1][king.col - 1] == 'P' || board[king.row - 1][king.col + 1] == 'P')
-		return (1);
-	else
+	if (board[king.row - f][king.col - f] != 'B' && board[king.row - f][king.col + f] != 'B' && board[king.row + f][king.col + f] != 'B' && board[king.row + f][king.col - f] != 'B')
+	{
+		check_bishop(board, king, f++);
 		return (0);
+	}
+	else
+		return (1);
 }
 
 
-int	ft_checkmate(char **board, size_t size, t_point king)
+int	ft_checkmate(char **board, t_point king)
 {
-	if (check_pawn(board, size, king))
+	if (check_pawn(board, king))
+		return (1);
+	if (check_bishop(board, king, 1))
 		return (1);
 	else
 		return (0);
@@ -30,7 +33,7 @@ int	main(int argc, char **argv)
 		size = ft_strlen(argv[1]);
 		board = create_board(argv, size, argc);
 		king = find_king(board);
-		if (ft_checkmate(board, size, king))
+		if (ft_checkmate(board, king))
 			ft_putstr("Success");
 		else
 			ft_putstr("Fail");
